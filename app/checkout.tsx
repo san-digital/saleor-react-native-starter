@@ -18,6 +18,8 @@ const Checkout = () => {
     const router = useRouter();
     const { startCheckout, confirmationData, convertCartToOrder, cancelPayment } = usePaymentContext()
 
+    const buyNowEnabled = cart?.email && cart?.billingAddress && (cart?.isShippingRequired ? cart?.shippingAddress : true)
+
     useEffect(() => {
         if (confirmationData) {
             initializePaymentSheet().then(() => openPaymentSheet())
@@ -92,6 +94,10 @@ const Checkout = () => {
     };
 
     const buyNow = () => {
+        if (!buyNowEnabled) {
+            Alert.alert("Please fill in required information to contiue");
+            return
+        }
         if (confirmationData) {
             openPaymentSheet()
         } else {
@@ -105,13 +111,18 @@ const Checkout = () => {
             <ScrollView testID="cart-list-scroll">
                 <PaddedView style={{marginTop: 12}}>
                     <Text style={styles.termsText}>By placing your order you agree to the Saleor App's Terms and Conditions of Awesomeness. Please see our Privacy Lotus, our Cookie Recipes for more details.</Text>
-                    <Button mode="contained" onPress={buyNow}  >Buy Now</Button>
+                    <Button mode="contained" onPress={buyNow}>
+                        Buy Now
+                    </Button>
                 </PaddedView>
                 <OrderTotal />
                 <PersonalDetails />
                 <BillingAddress />
-                <ShippingAddress />
-                <ShippingMethodSelector />
+
+                {cart?.isShippingRequired && <>
+                    <ShippingAddress />
+                    <ShippingMethodSelector />
+                </>}
             </ScrollView >
         </SafeAreaView >
     </StripeProvider>

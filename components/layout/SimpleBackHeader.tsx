@@ -35,7 +35,7 @@ const SimpleBackHeader = () => {
 const styles = StyleSheet.create({
   container: {
     padding: 16,
-    height: 40,
+    height: 50,
     marginTop: 30,
     marginBottom: 10,
     display: "flex",

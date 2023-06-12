@@ -36,7 +36,7 @@ const SearchHeaderWithBack = () => {
         </View>
 
       </SafeAreaView>
-      <LoadingIndicator />
+      <LoadingIndicator style={{marginTop: 12}}/>
     </>
   );
 }
