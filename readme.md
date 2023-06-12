@@ -15,10 +15,20 @@ These instructions will get you a copy of the project up and running on your loc
 
 ## Prerequisites
 - Node.js 14.16
+- Xcode and Android Studio Emulator
 - A Saleor cloud instance or running instance of Saleor.
   - Saleor cloud seed data required
   - Saleor Stripe plugin configured
 - A Stripe account.
+
+### Xcode and Android Studio
+To run the app in both ios and android emulators, follow setup instructions below,
+
+[https://docs.expo.dev/workflow/android-studio-emulator/](https://docs.expo.dev/workflow/android-studio-emulator/)
+
+[https://docs.expo.dev/workflow/ios-simulator/](https://docs.expo.dev/workflow/ios-simulator/)
+
+Note running Expo in web mode is not supported for this starter.
 
 ### Configuring Saleor
 A Saleor cloud instance can be easily configured following this guide, [https://docs.saleor.io/docs/3.x/cloud](https://docs.saleor.io/docs/3.x/cloud).
