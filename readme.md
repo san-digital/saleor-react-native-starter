@@ -1,10 +1,11 @@
 # Saleor Mobile App
 A GraphQL-powered, mobile native application storefront for Saleor.
 
-Intended to be used with Saleor Cloud seed data
+Intended to be used with Saleor Cloud seed data.
 
 # Features
-Headless ecommerce storefront built with GraphQL, Apollo Client, React Native, and Typescript
+A headless ecommerce storefront built with GraphQL, Apollo Client, React Native, and Typescript, the following features are implemented:
+
 - Saleor GraphQL API integration
 - Auto generate graphql typescript bindings
 - Stripe integration with Saleor payment gateway integration
@@ -19,6 +20,19 @@ These instructions will get you a copy of the project up and running on your loc
   - Saleor Stripe plugin configured
 - A Stripe account.
 
+### Configuring Saleor
+A Saleor cloud instance can be easily configured following this guide, [https://docs.saleor.io/docs/3.x/cloud](https://docs.saleor.io/docs/3.x/cloud).
+
+Once setup the instance of Saleor Cloud should come with seeded test data that can immediately viewed in the mobile app. To do this simply update the environment variable with the name chosen for your saleor instance (`xxx` below).
+```
+SALEOR_API_URL=https://xxx.eu.saleor.cloud/graphql/
+```
+
+(See Development section below)
+
+#### Updating collection for dashboard banner
+For the mobile app to look more professional we added a simple image to the seeded collection "Summer Picks".
+
 ### Configuring Stripe Saleor Plugin
 (Detailed information can be found [here](https://docs.saleor.io/docs/3.x/developer/available-plugins/stripe))
 
@@ -30,7 +44,7 @@ These instructions will get you a copy of the project up and running on your loc
     - Find Stripe plugin
     - Set plugin active
     - Paste in public key
-    - Create secret key 
+    - Create secret key
 
 ## Development
 Setup your .env file
@@ -54,7 +68,7 @@ When starting via `yarn android` or `yarn ios` to force reload the app. Focus on
 Navigate to `/graphql` and view contents of `*.graphql` files.
 
 ## Single channel
-The react native app is designed to work with a single channel, the channel can be changed by modifying the `CHANNEL` variable and building the app.
+The react native app is designed to work with a single saleor channel, the channel can be changed by modifying the `CHANNEL` variable and building the app.
 
 Mulitchannel not supported.
 
