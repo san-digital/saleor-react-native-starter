@@ -1,0 +1,25 @@
+overwrite: true
+schema:
+  - ${SALEOR_API_URL}
+documents: "graphql/**/*.{ts,graphql}"
+generates:
+  saleor/api.generated.ts:
+    plugins:
+      - add:
+          content: |-
+            // THIS FILE IS GENERATED WITH `yarn generate`
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-react-apollo"
+      - "typescript-apollo-client-helpers"
+    config:
+      scalars:
+        JSONString: string
+        UUID: string
+        Metadata: Record<string, string>
+        DateTime: string
+      dedupeOperationSuffix: true # Prevent suffix duplication in generated names
+      enumsAsTypes: true
+  ./graphql.schema.generated.json:
+    plugins:
+      - "introspection"

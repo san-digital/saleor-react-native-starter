@@ -1,0 +1,30 @@
+fragment CategoryPathFragment on Category {
+  id
+  name
+  slug
+  backgroundImage {
+    url
+    alt
+  }
+  products(first: 1, channel: $channel) {
+    edges {
+      node {
+        name
+        media {
+          url
+          alt
+        }
+      }
+    }
+  }
+}
+
+query CategoryPaths($channel: String!) {
+  categories(first: 100) {
+    edges {
+      node {
+        ...CategoryPathFragment
+      }
+    }
+  }
+}

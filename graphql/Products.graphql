@@ -1,0 +1,116 @@
+fragment ProductVariantFragment on ProductVariant {
+  id
+  sku
+  name
+  media {
+    id
+    alt
+    url
+  }
+  pricing {
+    price {
+      gross {
+        amount
+        currency
+      }
+    }
+  }
+  attributes {
+    attribute {
+      id
+      slug
+      name
+    }
+    values {
+      name
+      slug
+      value
+      boolean
+      plainText
+    }
+  }
+}
+
+fragment ProductFragment on Product {
+  id
+  name
+  description
+  slug
+  category {
+    slug
+    name
+  }
+  media {
+    url
+    alt
+  }
+  defaultVariant {
+    ...ProductVariantFragment
+  }
+  pricing {
+    priceRange {
+      start {
+        gross {
+          amount
+        }
+      }
+    }
+  }
+  attributes {
+    attribute {
+      id
+      slug
+      name
+    }
+    values {
+      name
+      slug
+      value
+      boolean
+      plainText
+      reference
+    }
+  }
+  variants {
+    ...ProductVariantFragment
+  }
+}
+
+query getProductById($id: ID!, $channel: String!) {
+  product(id: $id, channel: $channel) {
+    ...ProductFragment
+  }
+}
+
+query getProductsList($channel: String!) {
+  products(first: 10, channel: $channel) {
+    edges {
+      node {
+        ...ProductFragment
+      }
+    }
+  }
+}
+
+query searchProducts(
+  $channel: String!
+  $search: String!
+  $categories: [ID!]
+  $collections: [ID!]
+) {
+  products(
+    first: 100
+    channel: $channel
+    filter: {
+      search: $search
+      categories: $categories
+      collections: $collections
+    }
+  ) {
+    edges {
+      node {
+        ...ProductFragment
+      }
+    }
+  }
+}

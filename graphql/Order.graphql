@@ -1,0 +1,139 @@
+fragment OrderShippingPrice on TaxedMoney {
+  currency
+  gross {
+    currency
+    amount
+  }
+}
+
+fragment OrderShippingMethod on ShippingMethod {
+  id
+  name
+  price {
+    amount
+  }
+}
+
+fragment OrderPrice on TaxedMoney {
+  currency
+  tax {
+    currency
+    amount
+  }
+  net {
+    currency
+    amount
+  }
+  gross {
+    currency
+    amount
+  }
+}
+
+fragment OrderLineVariant on ProductVariant {
+  id
+  product {
+    id
+    name
+    attributes {
+      attribute {
+        id
+        slug
+        name
+      }
+
+      values {
+        name
+        slug
+        value
+        boolean
+        reference
+        plainText
+      }
+    }
+    media {
+      url
+    }
+  }
+  attributes {
+    attribute {
+      id
+      slug
+      name
+    }
+    values {
+      name
+      slug
+      value
+      boolean
+      reference
+      plainText
+    }
+  }
+  sku
+  name
+  media {
+    url
+  }
+}
+
+fragment OrderLineFragment on OrderLine {
+  id
+  quantity
+  metadata {
+    key
+    value
+  }
+  undiscountedUnitPrice {
+    gross {
+      amount
+    }
+  }
+  unitDiscount {
+    amount
+  }
+  totalPrice {
+    ...OrderPrice
+  }
+  variant {
+    ...OrderLineVariant
+  }
+}
+
+fragment OrderFragment on Order {
+  id
+  number
+  shippingPrice {
+    ...OrderShippingPrice
+  }
+  shippingMethodName
+  shippingMethods {
+    ...OrderShippingMethod
+  }
+  total {
+    ...OrderPrice
+  }
+  subtotal {
+    ...OrderPrice
+  }
+  voucher {
+    code
+    discountValue
+    currency
+  }
+  undiscountedTotal {
+    gross {
+      currency
+      amount
+    }
+  }
+  lines {
+    ...OrderLineFragment
+  }
+}
+
+query getOrderById($id: ID!) {
+  order(id: $id) {
+    ...OrderFragment
+  }
+}

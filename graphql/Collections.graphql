@@ -1,0 +1,34 @@
+fragment CollectionFragment on Collection {
+  id
+  name
+  description
+  slug
+  backgroundImage {
+    url
+    alt
+  }
+  products(first: 5) {
+    edges {
+      node {
+        id
+        name
+        defaultVariant {
+          media {
+            url
+            alt
+          }
+        }
+      }
+    }
+  }
+}
+
+query getCollections {
+  collections(first: 10, channel: "default-channel") {
+    edges {
+      node {
+        ...CollectionFragment
+      }
+    }
+  }
+}
