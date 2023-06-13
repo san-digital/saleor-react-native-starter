@@ -83,6 +83,3 @@ Navigate to `/graphql` and view contents of `*.graphql` files.
 The react native app is designed to work with a single saleor channel, the channel can be changed by modifying the `CHANNEL` variable and building the app.
 
 Mulitchannel not supported.
-
-## Building
-TBC
