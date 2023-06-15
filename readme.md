@@ -65,8 +65,6 @@ Setup your .env file
 Generate GraphQL apis from schema
 - `yarn generate`
 
-(Note, `ctrl + c` is required to exit generate process)
-
 Debug in ios for dev mode
 - `yarn ios`
 

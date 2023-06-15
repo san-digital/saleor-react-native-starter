@@ -6,7 +6,7 @@
     "android": "dotenv -c -- expo start --android",
     "ios": "dotenv -c -- expo start --ios",
     "test": "jest --watchAll",
-    "generate": "dotenv -c -- graphql-codegen --config codegen.yml -w"
+    "generate": "dotenv -c -- graphql-codegen --config codegen.yml"
   },
   "jest": {
     "preset": "jest-expo"
